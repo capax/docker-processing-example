@@ -2,7 +2,7 @@
 
 docker build -t ddp-haproxy .
 
-if docker container ls -al | grep -q my-sweet-proxy; then
+if docker container ls | grep -q my-sweet-proxy; then
   # stop the container
   docker container stop my-sweet-proxy
   # torch the container
