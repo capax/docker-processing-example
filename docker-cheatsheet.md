@@ -6,6 +6,6 @@
     * `-d` means the container starts detatched
 * listing all containers: `docker container ls -al`
 
-* test that hap config: `docker run -it --rm --name haproxy-syntax-check ddp-haproxy haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg`
+* test that hap config: `docker run -it --network ddp --rm --name haproxy-syntax-check ddp-haproxy haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg`
     * note that the hap config location must match the one in the `COPY` directive in the dockerfile
     * `--rm` torches the container on exit 
