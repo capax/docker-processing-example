@@ -18,6 +18,11 @@ pushd ./rabbit
 ./rabbit.sh
 popd
 
+# set up the feeder services for rabbit
+pushd ./queue-proxy
+./queue-proxy.sh
+popd
+
 # set up ssol
 pushd ./ssol
 ./ssol.sh
