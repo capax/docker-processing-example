@@ -7,7 +7,7 @@ const Client = require('pg')
 const config = {
   user: 'ddp',
   password: 'Password123',
-  host: 'localhost',
+  host: 'ddp-pg',
   database: 'sandbox',
   port: 5432
 };
