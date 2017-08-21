@@ -19,7 +19,7 @@ client.connect()
 
     amqp.connect('amqp://ddp-rabbit:5672')
       .then((c) => {
-        return connection.createChannel();
+        return c.createChannel();
       })
       .then((channel) => {
         channel.assertQueue('data-movement')

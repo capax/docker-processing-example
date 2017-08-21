@@ -25,3 +25,4 @@ echo "waiting 20s..."
 sleep 20
 
 docker exec -t ddp-mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123 -d master -Q "create database sandbox"
+docker exec -t ddp-mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123 -d master -Q "create table sandbox.dbo.sample (id int not null identity(1,1) primary key, stuff nvarchar(4000))"

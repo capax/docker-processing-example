@@ -4,7 +4,7 @@ var request = require('request');
 var connection = {
   user: 'sa',
   password: 'Password123',
-  server: 'localhost',
+  server: 'ddp-mssql',
   database: 'sandbox'
 };
 
@@ -13,7 +13,7 @@ var CronJob = require('cron')
   .CronJob;
 
 //run every minute
-new CronJob('0 */1 * * * *', function() {
+(new CronJob('0 */1 * * * *', function() {
   Promise.resolve({})
     .then((p) => {
       p.sourcePool = new mssql.ConnectionPool(connection);
@@ -45,8 +45,9 @@ new CronJob('0 */1 * * * *', function() {
               });
             });
           }));
-        });
+        })
+        .then(() => p);
     })
     .then((p) => p.sourcePool.close())
     .catch(console.warn);
-});
+})).start();
