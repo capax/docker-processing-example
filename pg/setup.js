@@ -22,15 +22,6 @@ client.connect()
       .then(() => console.log('table created'));
   })
   .then(() => {
-    //add some data to that table
-    var a = new Array(10);
-    a.fill(1);
-    return Promise.all(a.map((n, ix) => {
-      return client.query(`insert into sample (stuff) values ('hello there ${ix}')`);
-    }))
-      .then(()=> console.log('data inserted'));
-  })
-  .then(() => {
     //get the data and dump it out
     return client.query('select * from sample')
       .then((results) => console.dir(results.rows));
