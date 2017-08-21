@@ -12,6 +12,8 @@ const config = {
   port: 5432
 };
 
+console.log('\n\n ## starting consumer ## \n\n');
+
 const client = new Client(config);
 
 client.connect()
@@ -25,23 +27,28 @@ client.connect()
         channel.assertQueue('data-movement')
           .then((ok) => {
             return channel.consume('data-movement', function(msg) {
-              var record = JSON.parse(msg.content.toString());
-              console.log(`received msg for ${record.id}`);
+              var parsed = JSON.parse(msg.content.toString());
+              console.log(`received msg for ${parsed.record.id}`);
               //on data-movement, check to see if the record exists
-              return client.query(`select * from sample where id = ${record.id}`)
+              return client.query(`select * from ${parsed.table} where id = ${parsed.record.id}`)
                 .then((existing) => {
-                  if(existing.rows.length > 0){
+                  var columns = Object.keys(parsed.record);
+
+                  if (existing.rows.length > 0) {
                     //if so, update
-                    return client.query(`update sandbox set stuff = "${record.stuff}" where id = ${record.id}`);
-                  }else{
+                    var update = columns.map(c => `${c} = '${parsed.record[c]}'`)
+                      .join(',');
+                    return client.query(`update ${parsed.table} set ${update} where id = ${parsed.record.id}`);
+                  } else {
                     //else insert
-                    return client.query(`insert into sandbox (stuff) values ("${record.stuff}")`);
+                    var temp = `insert into ${parsed.table} (${columns.join(',')}) values (${columns.map(c=>"'"+parsed.record[c]+"'").join(',')})`;
+                    console.log(temp);
+                    return client.query(temp);
                   }
-                });
+                })
+                .then(() => channel.ack(msg));
             })
           })
-          .then(() => {
-            return channel.close();
-          });
       })
+      .catch(console.warn)
   });

@@ -18,6 +18,9 @@ pushd ./rabbit
 ./rabbit.sh
 popd
 
+echo "sleeping 15s..."
+sleep 15s
+
 # set up the feeder services for rabbit
 pushd ./queue-proxy
 ./queue-proxy.sh
@@ -28,15 +31,12 @@ pushd ./ssol
 ./ssol.sh
 popd
 
-echo "sleeping 15s..."
-sleep 15s
 
 # set up hap
 # nb, hap has to be last so the rules don't cause it to crash
 pushd ./haproxy
 ./hap.sh
 popd
-
 
 # DATA MOVEVMENT ##########################################
 

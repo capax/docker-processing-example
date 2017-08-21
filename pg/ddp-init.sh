@@ -6,7 +6,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE sandbox TO ddp;
     --create table ddp.public.sample (id serial primary key, stuff varchar(4000))
     \c sandbox;
-    create table sample (id serial primary key, stuff varchar(4000));
+    create table sample (id int primary key, stuff varchar(4000));
     grant all privileges on table sample to ddp;
 EOSQL
 

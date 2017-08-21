@@ -8,12 +8,13 @@ var connection = {
   database: 'sandbox'
 };
 
+console.log('\n\n ## starting producer ## \n\n');
 
 var CronJob = require('cron')
   .CronJob;
 
-//run every minute
-(new CronJob('0 */1 * * * *', function() {
+//run every so often
+(new CronJob('*/10 * * * * *', function() {
   Promise.resolve({})
     .then((p) => {
       p.sourcePool = new mssql.ConnectionPool(connection);
@@ -34,7 +35,7 @@ var CronJob = require('cron')
           Promise.all(p.records.map(record => {
             return new Promise((resolve, reject) => {
               request.post({
-                url: 'http://ddp-haproxy',
+                url: 'http://ddp-proxy:2222',
                 json: {
                   table: 'sample',
                   record: record
