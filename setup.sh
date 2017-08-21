@@ -28,6 +28,9 @@ pushd ./ssol
 ./ssol.sh
 popd
 
+echo "sleeping 15s..."
+sleep 15s
+
 # set up hap
 # nb, hap has to be last so the rules don't cause it to crash
 pushd ./haproxy
@@ -35,3 +38,14 @@ pushd ./haproxy
 popd
 
 
+# DATA MOVEVMENT ##########################################
+
+# set up the producer
+pushd ./producer
+./producer.sh
+popd
+
+# set up the consumer
+pushd ./consumer
+./consumer.sh
+popd
