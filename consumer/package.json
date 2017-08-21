@@ -6,6 +6,7 @@
     "start": "node consumer.js"
   },
   "dependencies": {
-    "amqplib": "^0.5.1"
+    "amqplib": "^0.5.1",
+    "pg": "^7.1.2"
   }
 }
