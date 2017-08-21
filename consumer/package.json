@@ -1,14 +1,11 @@
 {
-  "name": "docker_web_app",
+  "name": "ddp-consumer",
   "version": "1.0.0",
-  "description": "Node.js on Docker",
-  "author": "First Last <first.last@example.com>",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node consumer.js"
   },
   "dependencies": {
     "amqplib": "^0.5.1",
-    "express": "^4.13.3"
   }
 }
