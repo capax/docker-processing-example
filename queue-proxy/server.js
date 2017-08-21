@@ -10,7 +10,7 @@ const HOST = '0.0.0.0';
 const app = express();
 app.post('/', (req, res) => {
   let connection = null;
-  amqp.connect('amqp://ddp-rasbbit:5672')
+  amqp.connect('amqp://ddp-rabbit:5672')
     .then((c) => {
       connection = c;
       return connection.createChannel();
