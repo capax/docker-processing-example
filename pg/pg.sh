@@ -19,4 +19,3 @@ docker run \
   --name ddp-pg \
   ddp-pg
 
-npm install && node setup.js

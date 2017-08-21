@@ -26,6 +26,7 @@ client.connect()
           .then((ok) => {
             return channel.consume('data-movement', function(msg) {
               var record = JSON.parse(msg.content.toString());
+              console.log(`received msg for ${record.id}`);
               //on data-movement, check to see if the record exists
               return client.query(`select * from sample where id = ${record.id}`)
                 .then((existing) => {
