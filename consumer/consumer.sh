@@ -2,7 +2,7 @@
 
 docker build -t ddp-consumer .
 
-if docker container ls | grep -q ddp-consumer; then
+if docker container ls -a | grep -q ddp-consumer; then
   # stop the container
   docker container stop ddp-consumer
   # torch the container
